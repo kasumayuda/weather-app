@@ -13,9 +13,16 @@ const forecast = (latitude, longitude, callback)=>{
             callback('Unable to find forecast. Try another coordinate.')
             return;
         }
-
+        
         const currentWeather = body.current;
-        callback(undefined, currentWeather.weather_descriptions[0] + ". It is currently " + currentWeather.temperature + " degrees. But it feels like " + currentWeather.feelslike + " degrees")
+        callback(
+            undefined, 
+            {
+                forecastResult: `${currentWeather.weather_descriptions[0]}. It is currently ${currentWeather.temperature} degrees with ${currentWeather.humidity}% humidity. But it feels like ${currentWeather.feelslike} degrees.`,
+                forecastIcon: currentWeather.weather_icons[0]
+            }
+            
+        )
 
     })
 }

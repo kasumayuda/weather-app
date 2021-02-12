@@ -56,16 +56,17 @@ app.get('/weather', (req, res) => {
             })
         }
 
-        forecast(latitude, longitude, (error, data)=>{
+        forecast(latitude, longitude, (error, data = {})=>{
             if (error !== undefined){
                 return res.send({
                     error:error
                 })
             }
-
+            
             return res.send({
-                forecast: data,
-                location: location
+                forecast: data.forecastResult,
+                location: location,
+                weatherIcon: data.forecastIcon
             });
 
         })
